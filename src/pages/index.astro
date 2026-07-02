@@ -1,10 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
+import RatesCard from '../components/RatesCard.astro';
 import { t } from '../i18n';
 ---
 
 <Base>
   <h1 class="sr-only">{t('nav.dashboard')}</h1>
   <!-- Сетка карточек метрик; карточки подключаются по мере готовности парсеров -->
-  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <RatesCard />
+  </div>
 </Base>

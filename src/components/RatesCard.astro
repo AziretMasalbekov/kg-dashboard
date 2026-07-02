@@ -1,0 +1,84 @@
+---
+import Sparkline from './Sparkline.astro';
+import { t } from '../i18n';
+import {
+  formatDateRu,
+  formatDelta,
+  formatValue,
+  latestWithDelta,
+  type MetricPayload,
+} from '../lib/metrics';
+
+import usd from '../../data/kgs_usd.json';
+import eur from '../../data/kgs_eur.json';
+import rub from '../../data/kgs_rub.json';
+import kzt from '../../data/kgs_kzt.json';
+
+const featured = usd as MetricPayload;
+const rest: [string, MetricPayload][] = [
+  ['EUR', eur as MetricPayload],
+  ['RUB', rub as MetricPayload],
+  ['KZT', kzt as MetricPayload],
+];
+
+const main = latestWithDelta(featured.series);
+// цвет кодирует только направление (вверх/вниз), не «хорошо/плохо»
+const deltaClass = (d: number | null) =>
+  d == null || d === 0
+    ? 'text-gray-500 dark:text-gray-400'
+    : d > 0
+      ? 'text-sky-700 dark:text-sky-400'
+      : 'text-amber-700 dark:text-amber-400';
+---
+
+<article class="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
+  <h2 class="text-sm font-medium text-gray-600 dark:text-gray-400">
+    {t('metric.kgs_rates.title')}
+  </h2>
+
+  <p class="mt-2 flex items-baseline gap-2">
+    <span class="text-3xl font-semibold tabular-nums">{formatValue(main.value)}</span>
+    <span class="text-sm text-gray-500 dark:text-gray-400">{featured.unit}</span>
+    {
+      main.delta != null && (
+        <span class={`text-sm tabular-nums ${deltaClass(main.delta)}`}>
+          {formatDelta(main.delta)}
+        </span>
+      )
+    }
+  </p>
+
+  <Sparkline series={featured.series} id="kgs-usd" />
+
+  <ul class="mt-3 space-y-1 border-t border-gray-100 pt-3 text-sm dark:border-gray-800">
+    {
+      rest.map(([code, m]) => {
+        const cur = latestWithDelta(m.series);
+        return (
+          <li class="flex items-baseline justify-between gap-2">
+            <span class="text-gray-600 dark:text-gray-400">{code}</span>
+            <span class="tabular-nums">
+              {formatValue(cur.value)}
+              {cur.delta != null && (
+                <span class={`ml-1 text-xs ${deltaClass(cur.delta)}`}>
+                  {formatDelta(cur.delta)}
+                </span>
+              )}
+            </span>
+          </li>
+        );
+      })
+    }
+  </ul>
+
+  <p class="mt-3 text-xs text-gray-500 dark:text-gray-400">
+    {t('metric.kgs_rates.explain')}
+  </p>
+
+  <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+    <a href={featured.source_url} rel="noopener" class="underline">
+      {t('card.source')}: {featured.source_name}
+    </a>
+    · {t('card.data_as_of')} {formatDateRu(featured.data_date)}
+  </p>
+</article>

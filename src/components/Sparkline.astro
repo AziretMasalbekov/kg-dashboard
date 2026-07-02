@@ -1,0 +1,76 @@
+---
+import { sparklinePoints, tail, type Point } from '../lib/metrics';
+import { t } from '../i18n';
+
+interface Props {
+  series: Point[];
+  id: string; // уникальный id для переключателя 1г/5л
+}
+
+const { series, id } = Astro.props;
+const year = sparklinePoints(tail(series, 365));
+const fiveYears = sparklinePoints(tail(series, 365 * 5));
+---
+
+<div class="sparkline" data-sparkline={id}>
+  <svg viewBox="0 0 120 32" class="h-8 w-full" preserveAspectRatio="none" aria-hidden="true">
+    <polyline
+      data-range="1y"
+      points={year}
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      class="text-gray-400 dark:text-gray-500"
+    ></polyline>
+    <polyline
+      data-range="5y"
+      points={fiveYears}
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      class="hidden text-gray-400 dark:text-gray-500"
+    ></polyline>
+  </svg>
+  <div class="mt-1 flex gap-1 text-xs" role="group">
+    <button
+      type="button"
+      data-range-btn="1y"
+      aria-pressed="true"
+      class="rounded px-1.5 py-0.5 font-medium text-gray-900 underline dark:text-gray-100"
+    >
+      {t('card.range.1y')}
+    </button>
+    <button
+      type="button"
+      data-range-btn="5y"
+      aria-pressed="false"
+      class="rounded px-1.5 py-0.5 text-gray-500 dark:text-gray-400"
+    >
+      {t('card.range.5y')}
+    </button>
+  </div>
+</div>
+
+<script>
+  // Переключение 1г/5л: обе линии отрисованы при сборке, JS только меняет видимость
+  for (const root of document.querySelectorAll<HTMLElement>('[data-sparkline]')) {
+    root.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLElement>('[data-range-btn]');
+      if (!btn) return;
+      const range = btn.dataset.rangeBtn!;
+      for (const line of root.querySelectorAll<SVGElement>('[data-range]')) {
+        line.classList.toggle('hidden', line.dataset.range !== range);
+      }
+      for (const b of root.querySelectorAll<HTMLElement>('[data-range-btn]')) {
+        const active = b === btn;
+        b.setAttribute('aria-pressed', String(active));
+        b.classList.toggle('underline', active);
+        b.classList.toggle('font-medium', active);
+        b.classList.toggle('text-gray-900', active);
+        b.classList.toggle('dark:text-gray-100', active);
+        b.classList.toggle('text-gray-500', !active);
+        b.classList.toggle('dark:text-gray-400', !active);
+      }
+    });
+  }
+</script>
