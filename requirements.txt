@@ -1,0 +1,5 @@
+# ETL (Python 3.12)
+requests==2.32.4
+
+# dev/test
+pytest==8.4.1

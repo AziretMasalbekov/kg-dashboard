@@ -1,0 +1,13 @@
+{
+  "site.title": "Открытые данные Кыргызстана",
+  "site.description": "Ключевые показатели страны из официальных открытых источников — с указанием источника и даты для каждой цифры.",
+  "nav.dashboard": "Показатели",
+  "nav.methodology": "Методология",
+  "card.source": "Источник",
+  "card.data_as_of": "данные на",
+  "card.range.1y": "1 год",
+  "card.range.5y": "5 лет",
+  "metric.download_csv": "Скачать CSV",
+  "footer.license": "Данные НСК КР — CC BY-NC-SA. Некоммерческий проект.",
+  "footer.source_code": "Исходный код"
+}
