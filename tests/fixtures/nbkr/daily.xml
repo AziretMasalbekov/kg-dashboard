@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1251" ?>
+<CurrencyRates Name="Daily Exchange Rates" Date="03.07.2026">
+<Currency ISOCode="USD">
+<Nominal>1</Nominal>
+<Value>87,4500</Value>
+</Currency>
+<Currency ISOCode="EUR">
+<Nominal>1</Nominal>
+<Value>99,8679</Value>
+</Currency>
+<Currency ISOCode="CNY">
+<Nominal>1</Nominal>
+<Value>12,8835</Value>
+</Currency>
+<Currency ISOCode="KZT">
+<Nominal>1</Nominal>
+<Value>0,1842</Value>
+</Currency>
+<Currency ISOCode="RUB">
+<Nominal>1</Nominal>
+<Value>1,1239</Value>
+</Currency>
+</CurrencyRates>

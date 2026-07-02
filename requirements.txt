@@ -1,5 +1,6 @@
 # ETL (Python 3.12)
 requests==2.32.4
+xlrd==2.0.2   # только для разового бэкфилла истории курсов НБКР (fin_stat.xls)
 
 # dev/test
 pytest==8.4.1
