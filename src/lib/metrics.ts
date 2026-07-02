@@ -61,8 +61,7 @@ export function sparklinePoints(rawSeries: Point[], w = 120, h = 32, pad = 2): s
 }
 
 const nf = new Intl.NumberFormat('ru-RU', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 4,
+  maximumFractionDigits: 4, // без хвостов «,00», но мелкие курсы (0,1842) не режем
 });
 
 export function formatValue(v: number): string {

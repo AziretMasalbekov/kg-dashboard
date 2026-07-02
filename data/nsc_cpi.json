@@ -1,0 +1,302 @@
+{
+  "metric": "nsc_cpi",
+  "unit": "% к предыдущему году",
+  "source_name": "Национальный статистический комитет Кыргызской Республики",
+  "source_url": "https://stat.gov.kg/ru/opendata/category/127/",
+  "fetched_at": "2026-07-02T17:40:23+00:00",
+  "data_date": "2024",
+  "series": [
+    {
+      "date": "2020",
+      "value": 106.3
+    },
+    {
+      "date": "2021",
+      "value": 111.9
+    },
+    {
+      "date": "2022",
+      "value": 113.9
+    },
+    {
+      "date": "2023",
+      "value": 110.8
+    },
+    {
+      "date": "2024",
+      "value": 105.0
+    }
+  ],
+  "regions": [
+    {
+      "name_ru": "Кыргызская Республика",
+      "name_ky": "Кыргыз Республикасы",
+      "name_en": "Kyrgyz Republic",
+      "series": [
+        {
+          "date": "2020",
+          "value": 106.3
+        },
+        {
+          "date": "2021",
+          "value": 111.9
+        },
+        {
+          "date": "2022",
+          "value": 113.9
+        },
+        {
+          "date": "2023",
+          "value": 110.8
+        },
+        {
+          "date": "2024",
+          "value": 105.0
+        }
+      ]
+    },
+    {
+      "name_ru": "Баткенская область",
+      "name_ky": "Баткен облусу",
+      "name_en": "Batken oblast",
+      "series": [
+        {
+          "date": "2020",
+          "value": 107.9
+        },
+        {
+          "date": "2021",
+          "value": 113.1
+        },
+        {
+          "date": "2022",
+          "value": 113.6
+        },
+        {
+          "date": "2023",
+          "value": 111.3
+        },
+        {
+          "date": "2024",
+          "value": 104.9
+        }
+      ]
+    },
+    {
+      "name_ru": "Джалал-Абадская область",
+      "name_ky": "Жалал-Абад облусу",
+      "name_en": "Jalal-Abat oblast",
+      "series": [
+        {
+          "date": "2020",
+          "value": 106.1
+        },
+        {
+          "date": "2021",
+          "value": 114.6
+        },
+        {
+          "date": "2022",
+          "value": 114.6
+        },
+        {
+          "date": "2023",
+          "value": 112.8
+        },
+        {
+          "date": "2024",
+          "value": 103.4
+        }
+      ]
+    },
+    {
+      "name_ru": "Иссык-Кульская область",
+      "name_ky": "Ысык-Көл облусу",
+      "name_en": "Yssyk-Kul oblast",
+      "series": [
+        {
+          "date": "2020",
+          "value": 106.2
+        },
+        {
+          "date": "2021",
+          "value": 111.0
+        },
+        {
+          "date": "2022",
+          "value": 112.3
+        },
+        {
+          "date": "2023",
+          "value": 108.1
+        },
+        {
+          "date": "2024",
+          "value": 106.3
+        }
+      ]
+    },
+    {
+      "name_ru": "Нарынская область",
+      "name_ky": "Нарын облусу",
+      "name_en": "Naryn oblast",
+      "series": [
+        {
+          "date": "2020",
+          "value": 106.3
+        },
+        {
+          "date": "2021",
+          "value": 113.5
+        },
+        {
+          "date": "2022",
+          "value": 117.0
+        },
+        {
+          "date": "2023",
+          "value": 116.2
+        },
+        {
+          "date": "2024",
+          "value": 104.8
+        }
+      ]
+    },
+    {
+      "name_ru": "Ошская область",
+      "name_ky": "Ош облусу",
+      "name_en": "Osh oblast",
+      "series": [
+        {
+          "date": "2020",
+          "value": 105.3
+        },
+        {
+          "date": "2021",
+          "value": 110.8
+        },
+        {
+          "date": "2022",
+          "value": 109.4
+        },
+        {
+          "date": "2023",
+          "value": 108.2
+        },
+        {
+          "date": "2024",
+          "value": 105.6
+        }
+      ]
+    },
+    {
+      "name_ru": "Таласская область",
+      "name_ky": "Талас облусу",
+      "name_en": "Talas oblast",
+      "series": [
+        {
+          "date": "2020",
+          "value": 108.1
+        },
+        {
+          "date": "2021",
+          "value": 112.0
+        },
+        {
+          "date": "2022",
+          "value": 112.6
+        },
+        {
+          "date": "2023",
+          "value": 111.0
+        },
+        {
+          "date": "2024",
+          "value": 105.5
+        }
+      ]
+    },
+    {
+      "name_ru": "Чуйская область",
+      "name_ky": "Чүй облусу",
+      "name_en": "Chui oblast",
+      "series": [
+        {
+          "date": "2020",
+          "value": 106.0
+        },
+        {
+          "date": "2021",
+          "value": 112.9
+        },
+        {
+          "date": "2022",
+          "value": 112.1
+        },
+        {
+          "date": "2023",
+          "value": 108.1
+        },
+        {
+          "date": "2024",
+          "value": 101.7
+        }
+      ]
+    },
+    {
+      "name_ru": "г.Бишкек",
+      "name_ky": "Бишкек ш.",
+      "name_en": "Bishkek city",
+      "series": [
+        {
+          "date": "2020",
+          "value": 106.9
+        },
+        {
+          "date": "2021",
+          "value": 111.8
+        },
+        {
+          "date": "2022",
+          "value": 114.8
+        },
+        {
+          "date": "2023",
+          "value": 110.1
+        },
+        {
+          "date": "2024",
+          "value": 104.9
+        }
+      ]
+    },
+    {
+      "name_ru": "г.Ош",
+      "name_ky": "Ош ш.",
+      "name_en": "Osh city",
+      "series": [
+        {
+          "date": "2020",
+          "value": 103.8
+        },
+        {
+          "date": "2021",
+          "value": 110.5
+        },
+        {
+          "date": "2022",
+          "value": 113.0
+        },
+        {
+          "date": "2023",
+          "value": 115.8
+        },
+        {
+          "date": "2024",
+          "value": 107.4
+        }
+      ]
+    }
+  ]
+}

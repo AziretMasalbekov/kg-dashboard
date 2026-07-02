@@ -1,0 +1,76 @@
+---
+import { t, type MessageKey } from '../i18n';
+import {
+  formatDelta,
+  formatValue,
+  latestWithDelta,
+  sparklinePoints,
+  type MetricPayload,
+} from '../lib/metrics';
+
+interface Props {
+  slug: string; // nsc_cpi, nsc_wage, ...
+}
+
+const { slug } = Astro.props;
+
+const files = import.meta.glob<MetricPayload>('../../data/*.json', {
+  eager: true,
+  import: 'default',
+});
+const data = files[`../../data/${slug}.json`];
+if (!data) throw new Error(`data/${slug}.json не найден — запустите scripts/parse_nsc.py`);
+
+const { value, delta } = latestWithDelta(data.series);
+const points = sparklinePoints(data.series);
+const firstYear = data.series[0].date;
+const lastYear = data.series[data.series.length - 1].date;
+
+// цвет кодирует только направление (вверх/вниз), не «хорошо/плохо»
+const deltaClass =
+  delta == null || delta === 0
+    ? 'text-gray-500 dark:text-gray-400'
+    : delta > 0
+      ? 'text-sky-700 dark:text-sky-400'
+      : 'text-amber-700 dark:text-amber-400';
+---
+
+<article class="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
+  <h2 class="text-sm font-medium text-gray-600 dark:text-gray-400">
+    {t(`metric.${slug}.title` as MessageKey)}
+  </h2>
+
+  <p class="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+    <span class="text-3xl font-semibold tabular-nums">{formatValue(value)}</span>
+    <span class="text-sm text-gray-500 dark:text-gray-400">{data.unit}</span>
+    {
+      delta != null && (
+        <span class={`text-sm tabular-nums ${deltaClass}`}>{formatDelta(delta)}</span>
+      )
+    }
+  </p>
+
+  <svg viewBox="0 0 120 32" class="mt-2 h-8 w-full" preserveAspectRatio="none" aria-hidden="true">
+    <polyline
+      points={points}
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      class="text-gray-400 dark:text-gray-500"></polyline>
+  </svg>
+  <p class="mt-1 flex justify-between text-xs text-gray-400 dark:text-gray-500">
+    <span>{firstYear}</span>
+    <span>{lastYear}</span>
+  </p>
+
+  <p class="mt-3 text-xs text-gray-500 dark:text-gray-400">
+    {t(`metric.${slug}.explain` as MessageKey)}
+  </p>
+
+  <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+    <a href={data.source_url} rel="noopener" class="underline">
+      {t('card.source')}: {t('nsc.short_name')}
+    </a>
+    · {t('card.data_for')} {lastYear} {t('card.year_suffix')}
+  </p>
+</article>

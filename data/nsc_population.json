@@ -1,0 +1,157 @@
+{
+  "metric": "nsc_population",
+  "unit": "тыс. человек",
+  "source_name": "Национальный статистический комитет Кыргызской Республики",
+  "source_url": "https://stat.gov.kg/ru/opendata/category/316/",
+  "fetched_at": "2026-07-02T17:40:24+00:00",
+  "data_date": "2025",
+  "series": [
+    {
+      "date": "2021",
+      "value": 6789.6
+    },
+    {
+      "date": "2022",
+      "value": 6912.9
+    },
+    {
+      "date": "2023",
+      "value": 7037.6
+    },
+    {
+      "date": "2024",
+      "value": 7161.9
+    },
+    {
+      "date": "2025",
+      "value": 7281.8
+    }
+  ],
+  "regions": [
+    {
+      "name_ru": "Численность населения на начало года,  всего: тыс. человек",
+      "name_ky": "Жылдын башына карата калктын саны, бардыгы, миң адам",
+      "name_en": "Population at beginning of year, total: thous. people",
+      "series": [
+        {
+          "date": "2021",
+          "value": 6789.6
+        },
+        {
+          "date": "2022",
+          "value": 6912.9
+        },
+        {
+          "date": "2023",
+          "value": 7037.6
+        },
+        {
+          "date": "2024",
+          "value": 7161.9
+        },
+        {
+          "date": "2025",
+          "value": 7281.8
+        }
+      ]
+    },
+    {
+      "name_ru": "Число родившихся",
+      "name_ky": "Төрөлгөндөрдүн саны",
+      "name_en": "Number of births",
+      "series": [
+        {
+          "date": "2021",
+          "value": 150164.0
+        },
+        {
+          "date": "2022",
+          "value": 150225.0
+        },
+        {
+          "date": "2023",
+          "value": 145977.0
+        },
+        {
+          "date": "2024",
+          "value": 140419.0
+        }
+      ]
+    },
+    {
+      "name_ru": "Число умерших",
+      "name_ky": "Өлгөндөрдүн саны",
+      "name_en": "Number of deaths",
+      "series": [
+        {
+          "date": "2021",
+          "value": 38875.0
+        },
+        {
+          "date": "2022",
+          "value": 31401.0
+        },
+        {
+          "date": "2023",
+          "value": 31500.0
+        },
+        {
+          "date": "2024",
+          "value": 31710.0
+        }
+      ]
+    },
+    {
+      "name_ru": "Число иммигрантов",
+      "name_ky": "Иммигранттардын саны",
+      "name_en": "Number of immigrants",
+      "series": [
+        {
+          "date": "2021",
+          "value": 8229.0
+        },
+        {
+          "date": "2022",
+          "value": 12444.0
+        },
+        {
+          "date": "2023",
+          "value": 14453.0
+        },
+        {
+          "date": "2024",
+          "value": 14669.0
+        }
+      ]
+    },
+    {
+      "name_ru": "Число эмигрантов",
+      "name_ky": "Эмигранттардын саны",
+      "name_en": "Number of emigrants",
+      "series": [
+        {
+          "date": "2021",
+          "value": 8998.0
+        },
+        {
+          "date": "2022",
+          "value": 6527.0
+        },
+        {
+          "date": "2023",
+          "value": 4610.0
+        },
+        {
+          "date": "2024",
+          "value": 3461.0
+        }
+      ]
+    },
+    {
+      "name_ru": "Административно-территориальные преобразования",
+      "name_ky": "Администрациялык-аймактык өзгөрүүлөр",
+      "name_en": "Administrative-territorial reformation",
+      "series": []
+    }
+  ]
+}

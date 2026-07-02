@@ -18,10 +18,9 @@ jobs:
           python-version: '3.12'
       - run: pip install -r requirements.txt
 
-      # Месячная статистика НСК (stat.gov.kg).
-      # TODO: раскомментировать по мере готовности парсеров
-      # - run: python scripts/parse_cpi.py
-      - run: echo "no monthly parsers wired yet"
+      # Годовая/месячная статистика НСК (stat.gov.kg)
+      - run: python parse_nsc.py
+        working-directory: scripts
 
       - name: Commit refreshed data
         run: |
