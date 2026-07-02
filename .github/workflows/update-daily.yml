@@ -21,10 +21,10 @@ jobs:
       # Ежедневные парсеры. Любая ошибка fetch/parse = non-zero exit = красный CI;
       # сайт продолжает показывать последний закоммиченный (валидный) JSON.
       # TODO: раскомментировать по мере готовности парсеров
-      # - run: python scripts/parse_nbkr_rates.py
       # - run: python scripts/parse_toktogul.py
       # - run: python scripts/parse_openaq.py
-      - run: echo "no daily parsers wired yet"
+      - run: python parse_nbkr_rates.py
+        working-directory: scripts
 
       - name: Commit refreshed data
         run: |
