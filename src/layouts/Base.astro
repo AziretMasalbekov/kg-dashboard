@@ -21,10 +21,19 @@ const pageTitle = title ? `${title} — ${t('site.title')}` : t('site.title');
     <title>{pageTitle}</title>
   </head>
   <body class="min-h-screen bg-white text-gray-900 antialiased dark:bg-gray-950 dark:text-gray-100">
+    <!-- Шапка по стандарту: слева название и краткое описание, справа навигация; фиксированная высота -->
     <header class="border-b border-gray-200 dark:border-gray-800">
       <nav class="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
-        <a href="/" class="font-semibold">{t('site.title')}</a>
-        <a href="/methodology" class="text-sm text-gray-600 hover:underline dark:text-gray-400">
+        <div class="min-w-0">
+          <a href="/" class="block truncate text-sm font-bold">{t('site.title')}</a>
+          <p class="mt-0.5 hidden truncate text-[11px] font-medium text-[#898989] sm:block">
+            {t('site.description')}
+          </p>
+        </div>
+        <a
+          href="/methodology"
+          class="shrink-0 text-sm text-gray-600 hover:underline dark:text-gray-400"
+        >
           {t('nav.methodology')}
         </a>
       </nav>

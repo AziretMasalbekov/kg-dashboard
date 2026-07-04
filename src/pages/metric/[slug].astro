@@ -109,8 +109,8 @@ const dataDateLabel = isAnnual
 
   const chart = echarts.init(el);
   chart.setOption({
-    // нейтральная одноцветная линия, без заливок и акцентов
-    color: [dark ? '#9ca3af' : '#6b7280'],
+    // единственный акцент данных — фирменная палитра (см. global.css)
+    color: [dark ? '#ef67a6' : '#f0047f'],
     grid: { left: 8, right: 8, top: 16, bottom: 8, containLabel: true },
     tooltip: { trigger: 'axis' },
     xAxis: {

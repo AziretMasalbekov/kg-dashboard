@@ -22,10 +22,12 @@ const deltaClass = 'text-gray-500 dark:text-gray-400';
 ---
 
 <article class="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
-  <h2 class="text-sm font-medium text-gray-600 dark:text-gray-400">
+  <!-- заголовок блока слева, иконка интерактивности справа (по стандарту) -->
+  <h2 class="flex items-center justify-between gap-2 text-[13px] font-bold">
     <a href={`/metric/${slug}`} class="hover:underline">
       {t(`metric.${slug}.title` as MessageKey)}
     </a>
+    <a href={`/metric/${slug}`} aria-hidden="true" tabindex="-1" class="text-gray-400">›</a>
   </h2>
 
   <p class="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -44,7 +46,7 @@ const deltaClass = 'text-gray-500 dark:text-gray-400';
       fill="none"
       stroke="currentColor"
       stroke-width="1.5"
-      class="text-gray-400 dark:text-gray-500"></polyline>
+      class="text-accent dark:text-accent-dark"></polyline>
   </svg>
   <p class="mt-1 flex justify-between text-xs text-gray-400 dark:text-gray-500">
     <span>{firstYear}</span>
