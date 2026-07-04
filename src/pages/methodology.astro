@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import { t } from '../i18n';
+import { metrics } from '../lib/data';
+
+// уникальные источники из самих данных — ничего не хардкодим
+const sources = [...new Map(
+  Object.values(metrics).map((m) => [m.source_name, m.source_url]),
+).entries()];
+---
+
+<Base title={t('nav.methodology')}>
+  <h1 class="text-xl font-semibold">{t('nav.methodology')}</h1>
+
+  <section class="mt-6 space-y-3 text-sm leading-relaxed">
+    <h2 class="font-medium">{t('methodology.sources.title')}</h2>
+    <p>{t('methodology.sources.text')}</p>
+    <ul class="list-disc space-y-1 pl-5">
+      {
+        sources.map(([name, url]) => (
+          <li>
+            <a href={url} rel="noopener" class="underline">{name}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="mt-6 space-y-3 text-sm leading-relaxed">
+    <h2 class="font-medium">{t('methodology.schedule.title')}</h2>
+    <p>{t('methodology.schedule.text')}</p>
+  </section>
+
+  <section class="mt-6 space-y-3 text-sm leading-relaxed">
+    <h2 class="font-medium">{t('methodology.license.title')}</h2>
+    <p>
+      {t('methodology.license.text')}{' '}
+      <a
+        href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.ru"
+        rel="noopener"
+        class="underline">CC BY-NC-SA 4.0</a
+      >.
+    </p>
+    <p>{t('methodology.neutrality.text')}</p>
+  </section>
+</Base>

@@ -1,12 +1,7 @@
 ---
 import { t, type MessageKey } from '../i18n';
-import {
-  formatDelta,
-  formatValue,
-  latestWithDelta,
-  sparklinePoints,
-  type MetricPayload,
-} from '../lib/metrics';
+import { metrics } from '../lib/data';
+import { formatDelta, formatValue, latestWithDelta, sparklinePoints } from '../lib/metrics';
 
 interface Props {
   slug: string; // nsc_cpi, nsc_wage, ...
@@ -14,11 +9,7 @@ interface Props {
 
 const { slug } = Astro.props;
 
-const files = import.meta.glob<MetricPayload>('../../data/*.json', {
-  eager: true,
-  import: 'default',
-});
-const data = files[`../../data/${slug}.json`];
+const data = metrics[slug];
 if (!data) throw new Error(`data/${slug}.json не найден — запустите scripts/parse_nsc.py`);
 
 const { value, delta } = latestWithDelta(data.series);
@@ -32,7 +23,9 @@ const deltaClass = 'text-gray-500 dark:text-gray-400';
 
 <article class="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
   <h2 class="text-sm font-medium text-gray-600 dark:text-gray-400">
-    {t(`metric.${slug}.title` as MessageKey)}
+    <a href={`/metric/${slug}`} class="hover:underline">
+      {t(`metric.${slug}.title` as MessageKey)}
+    </a>
   </h2>
 
   <p class="mt-2 flex flex-wrap items-baseline gap-x-2 gap-y-1">

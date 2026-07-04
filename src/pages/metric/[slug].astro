@@ -1,0 +1,141 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, type MessageKey } from '../../i18n';
+import { metrics } from '../../lib/data';
+import { formatDateRu, formatValue, latestWithDelta } from '../../lib/metrics';
+
+export function getStaticPaths() {
+  return Object.keys(metrics).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const data = metrics[slug!];
+
+// заголовок: для НСК-метрик есть ключ metric.<slug>.title, для валют — общий
+const titleKey = (
+  slug!.startsWith('kgs_') ? 'metric.kgs_rates.title' : `metric.${slug}.title`
+) as MessageKey;
+const title = t(titleKey);
+
+const { value } = latestWithDelta(data.series);
+const isAnnual = /^\d{4}$/.test(data.series[0].date);
+const regions = data.regions ?? [];
+// колонки таблицы: все годы, встречающиеся в строках датасета
+const years = [...new Set(regions.flatMap((r) => r.series.map((p) => p.date)))].sort();
+const dataDateLabel = isAnnual
+  ? `${t('card.data_for')} ${data.data_date} ${t('card.year_suffix')}`
+  : `${t('card.data_as_of')} ${formatDateRu(data.data_date)}`;
+---
+
+<Base title={title}>
+  <article>
+    <h1 class="text-xl font-semibold">{title}</h1>
+    <p class="mt-2 flex items-baseline gap-2">
+      <span class="text-3xl font-semibold tabular-nums">{formatValue(value)}</span>
+      <span class="text-sm text-gray-500 dark:text-gray-400">{data.unit}</span>
+    </p>
+
+    <div id="chart" class="mt-4 h-64 w-full sm:h-80"></div>
+    <script type="application/json" id="chart-data" set:html={JSON.stringify(data.series)} />
+
+    <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+      <a href={data.source_url} rel="noopener" class="underline">
+        {t('card.source')}: {data.source_name}
+      </a>
+      · {dataDateLabel}
+    </p>
+
+    <p class="mt-4">
+      <a
+        href={`/metric/${slug}.csv`}
+        class="inline-block rounded border border-gray-300 px-3 py-1.5 text-sm dark:border-gray-700"
+        download
+      >
+        {t('metric.download_csv')}
+      </a>
+    </p>
+
+    {
+      regions.length > 0 && (
+        <div class="mt-6 overflow-x-auto">
+          <table class="w-full min-w-[32rem] text-sm">
+            <thead>
+              <tr class="border-b border-gray-200 text-left dark:border-gray-800">
+                <th class="py-2 pr-4 font-medium">{t('metric.table.name')}</th>
+                {years.map((y) => (
+                  <th class="py-2 pr-4 text-right font-medium tabular-nums">{y}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {regions.map((r) => (
+                <tr class="border-b border-gray-100 dark:border-gray-900">
+                  <td class="py-2 pr-4">{r.name_ru}</td>
+                  {years.map((y) => {
+                    const p = r.series.find((pt) => pt.date === y);
+                    return (
+                      <td class="py-2 pr-4 text-right tabular-nums">
+                        {p ? formatValue(p.value) : '—'}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )
+    }
+  </article>
+</Base>
+
+<script>
+  import * as echarts from 'echarts/core';
+  import { LineChart } from 'echarts/charts';
+  import { GridComponent, TooltipComponent } from 'echarts/components';
+  import { CanvasRenderer } from 'echarts/renderers';
+
+  echarts.use([LineChart, GridComponent, TooltipComponent, CanvasRenderer]);
+
+  const el = document.getElementById('chart')!;
+  const series = JSON.parse(document.getElementById('chart-data')!.textContent!) as {
+    date: string;
+    value: number;
+  }[];
+
+  const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const axisColor = dark ? '#6b7280' : '#9ca3af';
+  const textColor = dark ? '#d1d5db' : '#374151';
+
+  const chart = echarts.init(el);
+  chart.setOption({
+    // нейтральная одноцветная линия, без заливок и акцентов
+    color: [dark ? '#9ca3af' : '#6b7280'],
+    grid: { left: 8, right: 8, top: 16, bottom: 8, containLabel: true },
+    tooltip: { trigger: 'axis' },
+    xAxis: {
+      type: 'category',
+      data: series.map((p) => p.date),
+      axisLine: { lineStyle: { color: axisColor } },
+      axisLabel: { color: textColor },
+    },
+    yAxis: {
+      type: 'value',
+      scale: true,
+      axisLabel: {
+        color: textColor,
+        formatter: (v: number) => new Intl.NumberFormat('ru-RU').format(v),
+      },
+      splitLine: { lineStyle: { color: dark ? '#1f2937' : '#e5e7eb' } },
+    },
+    series: [
+      {
+        type: 'line',
+        data: series.map((p) => p.value),
+        showSymbol: series.length < 40,
+        lineStyle: { width: 1.5 },
+      },
+    ],
+  });
+  window.addEventListener('resize', () => chart.resize());
+</script>
