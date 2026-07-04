@@ -1,0 +1,9 @@
+// Конфиг деплоя на Cloudflare Workers (статические ассеты из dist/)
+{
+  "name": "kg-dashboard",
+  "compatibility_date": "2026-07-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash"
+  }
+}
