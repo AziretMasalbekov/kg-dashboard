@@ -26,13 +26,8 @@ const points = sparklinePoints(data.series);
 const firstYear = data.series[0].date;
 const lastYear = data.series[data.series.length - 1].date;
 
-// цвет кодирует только направление (вверх/вниз), не «хорошо/плохо»
-const deltaClass =
-  delta == null || delta === 0
-    ? 'text-gray-500 dark:text-gray-400'
-    : delta > 0
-      ? 'text-sky-700 dark:text-sky-400'
-      : 'text-amber-700 dark:text-amber-400';
+// дельта без цветового кодирования: направление показывает только знак
+const deltaClass = 'text-gray-500 dark:text-gray-400';
 ---
 
 <article class="rounded-lg border border-gray-200 p-4 dark:border-gray-800">

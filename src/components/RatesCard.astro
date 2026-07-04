@@ -22,13 +22,8 @@ const rest: [string, MetricPayload][] = [
 ];
 
 const main = latestWithDelta(featured.series);
-// цвет кодирует только направление (вверх/вниз), не «хорошо/плохо»
-const deltaClass = (d: number | null) =>
-  d == null || d === 0
-    ? 'text-gray-500 dark:text-gray-400'
-    : d > 0
-      ? 'text-sky-700 dark:text-sky-400'
-      : 'text-amber-700 dark:text-amber-400';
+// дельта без цветового кодирования: направление показывает только знак
+const deltaClass = (_d: number | null) => 'text-gray-500 dark:text-gray-400';
 ---
 
 <article class="rounded-lg border border-gray-200 p-4 dark:border-gray-800">
